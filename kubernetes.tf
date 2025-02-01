@@ -30,7 +30,7 @@ resource "aws_instance" "kubernetes_master" {
   }
 }
 
-resource "aws_eip" "eip" {
+resource "aws_eip" "eip_worker_1" {
   instance = aws_instance.worker_node_1.id
   vpc      = false # Set to true if you're in a VPC
   tags = {
@@ -38,7 +38,7 @@ resource "aws_eip" "eip" {
   }
 }
 
-resource "aws_eip" "eip" {
+resource "aws_eip" "eip_worker_2" {
   instance = aws_instance.worker_node_2.id
   vpc      = false # Set to true if you're in a VPC
   tags = {
@@ -46,11 +46,11 @@ resource "aws_eip" "eip" {
   }
 }
 
-resource "aws_eip" "eip" {
+resource "aws_eip" "eip_master" {
   instance = aws_instance.kubernetes_master.id
   vpc      = false # Set to true if you're in a VPC
   tags = {
-    Name = "master-node-1-eip"
+    Name = "master-node-eip"
   }
 }
 
