@@ -17,7 +17,7 @@ resource "aws_instance" "worker_node_2" {
   instance_type = "t2.medium"
 
   tags = {
-    Name = "kubernetes-worker-node-1"
+    Name = "kubernetes-worker-node-2"
   }
 }
 
