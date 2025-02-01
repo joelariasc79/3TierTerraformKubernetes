@@ -5,7 +5,7 @@ provider "aws" {
 
 resource "aws_instance" "worker_node_1" {
   ami           = "ami-07d2649d67dbe8900"
-  instance_type = "t1.medium"
+  instance_type = "t2.medium"
 
   tags = {
     Name = "kubernetes-worker-node-1"
@@ -14,7 +14,7 @@ resource "aws_instance" "worker_node_1" {
 
 resource "aws_instance" "worker_node_2" {
   ami           = "ami-07d2649d67dbe8900"
-  instance_type = "t1.medium"
+  instance_type = "t2.medium"
 
   tags = {
     Name = "kubernetes-worker-node-1"
@@ -23,10 +23,34 @@ resource "aws_instance" "worker_node_2" {
 
 resource "aws_instance" "kubernetes_master" {
   ami           = "ami-07d2649d67dbe8900"
-  instance_type = "t1.medium"
+  instance_type = "t2.medium"
 
   tags = {
     Name = "kubernetes-master-node"
+  }
+}
+
+resource "aws_eip" "eip" {
+  instance = aws_instance.worker_node_1.id
+  vpc      = false # Set to true if you're in a VPC
+  tags = {
+    Name = "worker-node-1-eip"
+  }
+}
+
+resource "aws_eip" "eip" {
+  instance = aws_instance.worker_node_2.id
+  vpc      = false # Set to true if you're in a VPC
+  tags = {
+    Name = "worker-node-2-eip"
+  }
+}
+
+resource "aws_eip" "eip" {
+  instance = aws_instance.kubernetes_master.id
+  vpc      = false # Set to true if you're in a VPC
+  tags = {
+    Name = "master-node-1-eip"
   }
 }
 
