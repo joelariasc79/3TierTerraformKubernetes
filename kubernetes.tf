@@ -13,7 +13,7 @@ data "aws_vpc" "default" {
 }
 
 resource "aws_key_pair" "my_jenkins_key" {
-  key_name   = "my-key-pair"
+  key_name   = "my-unique-key-pair"  # Change the key pair name to a unique name
   public_key = var.public_key
 }
 
