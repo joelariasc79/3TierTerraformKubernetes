@@ -12,7 +12,7 @@ data "aws_vpc" "default" {
   default = true
 }
 
-resource "aws_key_pair" "my_key" {
+resource "aws_key_pair" "my_jenkins_key" {
   key_name   = "my-key-pair"
   public_key = var.public_key
 }
@@ -20,7 +20,7 @@ resource "aws_key_pair" "my_key" {
 resource "aws_instance" "worker_backend_worker_node" {
   ami           = "ami-07d2649d67dbe8900"
   instance_type = "t2.medium"
-  key_name      = aws_key_pair.my_key.key_name
+  key_name      = aws_key_pair.my_jenkins_key.key_name
 
   tags = {
     Name = "kubernetes-backend-worker-node"
@@ -94,7 +94,7 @@ resource "aws_security_group" "kubernetes_backend_worker_node_sg" {
 resource "aws_instance" "worker_frontend_worker_node" {
   ami           = "ami-07d2649d67dbe8900"
   instance_type = "t2.medium"
-  key_name      = aws_key_pair.my_key.key_name
+  key_name      = aws_key_pair.my_jenkins_key.key_name
 
   tags = {
     Name = "kubernetes-frontend-worker-node"
@@ -168,7 +168,7 @@ resource "aws_security_group" "kubernetes_frontend_worker_node_sg" {
 resource "aws_instance" "kubernetes_master" {
   ami           = "ami-07d2649d67dbe8900"
   instance_type = "t2.medium"
-  key_name      = aws_key_pair.my_key.key_name
+  key_name      = aws_key_pair.my_jenkins_key.key_name
 
   tags = {
     Name = "kubernetes-master-node"
