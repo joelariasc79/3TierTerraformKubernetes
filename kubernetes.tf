@@ -217,28 +217,28 @@ resource "aws_security_group" "kubernetes_master_node_sg" {
 }
 
 # Elastic IP
-resource "aws_eip" "eip_backend_worker_node" {
-  instance = aws_instance.worker_backend_worker_node.id
-  tags = {
-    Name = "backend-worker-node-eip"
-  }
-}
-
-# Elastic IP
-resource "aws_eip" "eip_frontend_worker_node" {
-  instance = aws_instance.worker_frontend_worker_node.id
-  tags = {
-    Name = "frontend-worker-node-eip"
-  }
-}
-
-# Elastic IP
-resource "aws_eip" "eip_master" {
-  instance = aws_instance.kubernetes_master.id
-  tags = {
-    Name = "master-node-eip"
-  }
-}
+# resource "aws_eip" "eip_backend_worker_node" {
+#   instance = aws_instance.worker_backend_worker_node.id
+#   tags = {
+#     Name = "backend-worker-node-eip"
+#   }
+# }
+# 
+# # Elastic IP
+# resource "aws_eip" "eip_frontend_worker_node" {
+#   instance = aws_instance.worker_frontend_worker_node.id
+#   tags = {
+#     Name = "frontend-worker-node-eip"
+#   }
+# }
+#
+# # Elastic IP
+# resource "aws_eip" "eip_master" {
+#   instance = aws_instance.kubernetes_master.id
+#   tags = {
+#     Name = "master-node-eip"
+#   }
+# }
 
 output "kubernetes_backend_worker_node_public_ip" {
   value = aws_instance.worker_backend_worker_node.public_ip
