@@ -209,8 +209,8 @@ resource "aws_security_group" "kubernetes_master_node_sg" {
   }
 
   ingress {
-    from_port   = 4200
-    to_port     = 4200
+    from_port   = 6443
+    to_port     = 6443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
