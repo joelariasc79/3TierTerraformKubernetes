@@ -100,6 +100,11 @@ resource "aws_instance" "worker_frontend_worker_node" {
     Name = "kubernetes-frontend-worker-node"
   }
 
+  root_block_device {
+    volume_size = 12
+    volume_type = "gp2"
+  }
+
   vpc_security_group_ids = [aws_security_group.kubernetes_frontend_worker_node_sg.id]
 }
 
@@ -173,6 +178,8 @@ resource "aws_instance" "kubernetes_master" {
   tags = {
     Name = "kubernetes-master-node"
   }
+
+  vpc_security_group_ids = [aws_security_group.kubernetes_master_node_sg.id]
 }
 
 resource "aws_security_group" "kubernetes_master_node_sg" {
@@ -223,7 +230,7 @@ resource "aws_security_group" "kubernetes_master_node_sg" {
 #     Name = "backend-worker-node-eip"
 #   }
 # }
-# 
+#
 # # Elastic IP
 # resource "aws_eip" "eip_frontend_worker_node" {
 #   instance = aws_instance.worker_frontend_worker_node.id
