@@ -26,6 +26,11 @@ resource "aws_instance" "worker_backend_worker_node" {
     Name = "kubernetes-backend-worker-node"
   }
 
+  root_block_device {
+    volume_size = 12
+    volume_type = "gp2"
+  }
+
   vpc_security_group_ids = [aws_security_group.kubernetes_backend_worker_node_sg.id]
 }
 
