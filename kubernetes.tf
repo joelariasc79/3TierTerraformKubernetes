@@ -61,6 +61,13 @@ resource "aws_security_group" "kubernetes_backend_worker_node_sg" {
   }
 
   ingress {
+    from_port   = 30008
+    to_port     = 30008
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
     from_port   = 6443
     to_port     = 6443
     protocol    = "tcp"
@@ -135,6 +142,13 @@ resource "aws_security_group" "kubernetes_frontend_worker_node_sg" {
   ingress {
     from_port   = 3306
     to_port     = 3306
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 30001
+    to_port     = 30001
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
